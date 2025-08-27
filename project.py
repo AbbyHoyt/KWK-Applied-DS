@@ -7,5 +7,14 @@ import requests
 # fox = response.json()
 # print(fox['image'])
 
-response = requests.get("https://lldev.thespacedevs.com/2.3.0/astronauts/?format=json")
+# response = requests.get("https://lldev.thespacedevs.com/2.3.0/astronauts/?format=json")
+# print(response.status_code)
+# astronauts = response.json()
+# print(astronauts['name'])
+
+# response = requests.get("https://lldev.thespacedevs.com/2.3.0/astronauts/4/?format=json")
+response = requests.get("https://lldev.thespacedevs.com/2.3.0/astronauts/4")
 print(response.status_code)
+astronaut = response.json()
+agency = astronaut['agency']
+print("Name: " + astronaut['name'] + "\nAgency: " + agency['name'])
