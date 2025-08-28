@@ -30,13 +30,24 @@ import pandas as pd
 #     count += 1
 
 
+# api_url = "https://lldev.thespacedevs.com/2.3.0/astronauts"
+
+# try:
+#     response = requests.get(api_url)
+#     response.raise_for_status()
+#     data = response.json()
+#     print("Successfully retrived data:")
+#     print(data)
+# except requests.exceptions.RequestException as e:
+#     print(f"Error fetching data: {e}")
+
 api_url = "https://lldev.thespacedevs.com/2.3.0/astronauts"
 
-try:
-    response = requests.get(api_url)
-    response.raise_for_status()
+response = requests.get(api_url)
+
+if response.status_code == 200:
     data = response.json()
-    print("Successfully retrived data:")
-    print(data)
-except requests.exceptions.RequestException as e:
-    print(f"Error fetching data: {e}")
+    df = pd.DataFrame(data)
+    print(df.head())
+else:
+    print(f"Failed to fetch data: {response.status_code}")
