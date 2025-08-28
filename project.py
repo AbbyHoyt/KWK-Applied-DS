@@ -20,10 +20,22 @@ import requests
 # agency = astronaut['agency']
 # print("Name: " + astronaut['name'] + "\nAgency: " + agency['name'])
 
-count = 1
-while count <  10:
-    response = requests.get("https://lldev.thespacedevs.com/2.3.0/astronauts/" + str(count))
-    astronaut = response.json()
-    agency = astronaut['agency']
-    print("Name: " + astronaut['name'] + "\nAgency: " + agency['name'] + "\nBio: " + astronaut['bio'] + "\n")
-    count += 1
+# count = 1
+# while count <  10:
+#     response = requests.get("https://lldev.thespacedevs.com/2.3.0/astronauts/" + str(count))
+#     astronaut = response.json()
+#     agency = astronaut['agency']
+#     print("Name: " + astronaut['name'] + "\nAgency: " + agency['name'] + "\nBio: " + astronaut['bio'] + "\n")
+#     count += 1
+
+
+api_url = "https://lldev.thespacedevs.com/2.3.0/astronauts"
+
+try:
+    response = requests.get(api_url)
+    response.raise_for_status()
+    data = response.json()
+    print("Successfully retrived data:")
+    print(data)
+except requests.exceptions.RequestException as e:
+    print(f"Error fetching data: {e}")
