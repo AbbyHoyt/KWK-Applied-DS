@@ -43,7 +43,7 @@ import pandas as pd
 
 # api_url = "https://lldev.thespacedevs.com/2.3.0/astronauts/?limit=100"
 
-api_url = "https://ll.thespacedevs.com/2.3.0/astronauts/?ordering=-time_in_space&limit=100"
+api_url = "https://ll.thespacedevs.com/2.3.0/astronauts/?ordering=-time_in_space&is_human=true&limit=100"
 
 response = requests.get(api_url)
 
