@@ -41,13 +41,16 @@ import pandas as pd
 # except requests.exceptions.RequestException as e:
 #     print(f"Error fetching data: {e}")
 
-api_url = "https://lldev.thespacedevs.com/2.3.0/astronauts"
+# api_url = "https://lldev.thespacedevs.com/2.3.0/astronauts/?limit=100"
+
+api_url = "https://ll.thespacedevs.com/2.3.0/astronauts/?ordering=-time_in_space&limit=100"
 
 response = requests.get(api_url)
 
 if response.status_code == 200:
     data = response.json()
     df = pd.DataFrame(data)
+    df.to_csv('astronaut_data.csv')
     print(df.head())
 else:
     print(f"Failed to fetch data: {response.status_code}")
