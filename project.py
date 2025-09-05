@@ -17,7 +17,6 @@ while api_url:
         break
 
 df = pd.json_normalize(astronaut_data, sep = '_')
-# data_to_keep = ['id', 'name', 'status_name', 'type_name', 'agency_name', 'age', 'date_of_birth', 'date_of_death', 'nationality']
-data_to_keep = ['id', 'name', 'status_name', 'type_name', 'agency_name', 'age', 'date_of_birth', 'date_of_death', 'nationality__nationality_name']
+data_to_keep = ['id', 'name', 'status_name', 'type_name', 'agency_name', 'age', 'date_of_birth', 'date_of_death', 'nationality']
 df_final = df.reindex(columns = data_to_keep)
-df_final.to_csv('astronaut_data_cleaned.csv', index = False, encoding = 'utf-8')
+df_final.to_csv('astronaut_data_cleaned_v2.csv', index = False, encoding = 'utf-8')
