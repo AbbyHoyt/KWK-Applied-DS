@@ -245,7 +245,7 @@ nationality_names = ["United States of America",
                      "Romania",
                      "Cuba",
                      "Mexico",
-                     "Maltese"
+                     "Maltese",
                      "Antigua and Barbuda",
                      "Pakistan",
                      "Portugal",
@@ -261,3 +261,10 @@ for item in nationality_counts:
     total += item
 
 print(f"Accounted nationalities for {total} astronauts.")
+
+
+plt.bar(nationality_names, nationality_counts)
+plt.xlabel('Nationality')
+plt.ylabel('Astronaut Count')
+plt.title('Nationality vs. Number of of Astronauts')
+plt.show()
