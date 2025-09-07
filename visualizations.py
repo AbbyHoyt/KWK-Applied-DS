@@ -259,12 +259,10 @@ print(f"Nationality Counts: {nationality_counts}")
 total = 0
 for item in nationality_counts:
     total += item
-
 print(f"Accounted nationalities for {total} astronauts.")
 
-
 plt.bar(nationality_names, nationality_counts)
-plt.xlabel('Nationality')
-plt.ylabel('Astronaut Count')
-plt.title('Nationality vs. Number of of Astronauts')
+plt.xlabel("Nationality")
+plt.ylabel("Number of Astronauts")
+plt.title("Nationality vs. Number of of Astronauts")
 plt.show()
