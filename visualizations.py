@@ -35,7 +35,7 @@ brazil_count = 0
 kazakhstan_count = 0
 bulgaria_count = 0
 saudi_arabia_count = 0
-afghanistan_count = 0
+afghan_count = 0
 czechia_count = 0
 austria_count = 0
 slovakia_count = 0
@@ -51,6 +51,11 @@ portugal_count = 0
 egypt_count = 0
 puerto_rico_count = 0
 saint_kitts_and_nevis_count = 0
+new_zealand_count = 0
+panama_count = 0
+australia_count = 0
+syria_count = 0
+norway_count = 0
 
 row = 0
 while row < 814:
@@ -120,8 +125,8 @@ while row < 814:
         bulgaria_count += 1
     if "Saudi Arabia" in current_nationality_array:
         saudi_arabia_count += 1
-    if "Afghanistan" in current_nationality_array:
-        afghanistan_count += 1
+    if "Afghan" in current_nationality_array:
+        afghan_count += 1
     if "Czechia" in current_nationality_array:
         czechia_count += 1
     if "Austria" in current_nationality_array:
@@ -152,6 +157,16 @@ while row < 814:
         puerto_rico_count += 1
     if "Saint Kitts and Nevis" in current_nationality_array:
         saint_kitts_and_nevis_count += 1
+    if "New Zealand" in current_nationality_array:
+        new_zealand_count += 1
+    if "Panama" in current_nationality_array:
+        panama_count += 1
+    if "Australia" in current_nationality_array:
+        australia_count += 1
+    if "Syria" in current_nationality_array:
+        syria_count += 1
+    if "Norway" in current_nationality_array:
+        norway_count += 1
 
     row = row + 1
 
@@ -187,7 +202,7 @@ nationality_counts = [united_states_of_america_count,
                       kazakhstan_count, 
                       bulgaria_count, 
                       saudi_arabia_count,
-                      afghanistan_count,
+                      afghan_count,
                       czechia_count,
                       austria_count,
                       slovakia_count,
@@ -202,7 +217,12 @@ nationality_counts = [united_states_of_america_count,
                       portugal_count,
                       egypt_count,
                       puerto_rico_count,
-                      saint_kitts_and_nevis_count]
+                      saint_kitts_and_nevis_count,
+                      new_zealand_count,
+                      panama_count,
+                      australia_count,
+                      syria_count,
+                      norway_count]
 
 nationality_names = ["United States of America", 
                      "Russia", 
@@ -236,7 +256,7 @@ nationality_names = ["United States of America",
                      "Kazakhstan",
                      "Bulgaria",
                      "Saudi Arabia",
-                     "Afghanistan",
+                     "Afghan",
                      "Czechia",
                      "Austria",
                      "Slovakia",
@@ -251,18 +271,31 @@ nationality_names = ["United States of America",
                      "Portugal",
                      "Egypt",
                      "Puerto Rico",
-                     "Saint Kitts and Nevis"]
+                     "Saint Kitts and Nevis",
+                     "New Zealand",
+                     "Panama",
+                     "Australia",
+                     "Syria",
+                     "Norway"]
 
 print(f"Nationality Names: {nationality_names}")
 print(f"Nationality Counts: {nationality_counts}")
+
+for i in range(len(nationality_names)):
+    print(f"{nationality_names[i]}: {nationality_counts[i]}")
 
 total = 0
 for item in nationality_counts:
     total += item
 print(f"Accounted nationalities for {total} astronauts.")
 
-plt.bar(nationality_names, nationality_counts)
-plt.xlabel("Nationality")
+sorted_data = sorted(zip(nationality_counts, nationality_names))
+sorted_nationality_counts, sorted_nationality_names = zip(*sorted_data)
+
+# plt.barh(nationality_names, nationality_counts, color="pink", edgecolor="black")
+plt.bar(sorted_nationality_names, sorted_nationality_counts, color="pink", edgecolor="black")
+plt.xlabel("Nationality", labelpad=2000)
+plt.xticks(rotation=90)
 plt.ylabel("Number of Astronauts")
 plt.title("Nationality vs. Number of of Astronauts")
 plt.show()
