@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import colorama 
-from colorama import Fore, Back, Style
+from colorama import Fore, Style
 
 colorama.init(autoreset = True)
 
@@ -282,11 +282,11 @@ nationality_names = ["United States of America",
                      "Syria",
                      "Norway"]
 
-print(Style.BRIGHT + Fore.BLACK + Back.CYAN + "Nationality Names and Counts Arrays:")
+print(Style.BRIGHT + Fore.RED + "Nationality Names and Counts Arrays:")
 print(Fore.BLACK + "Nationality Names: " + Style.NORMAL + Fore.BLUE + f"{nationality_names}\n")
 print(Fore.BLACK + "Nationality Counts: " + Style.NORMAL + Fore.BLUE + f"{nationality_counts}\n")
 
-print(Style.BRIGHT + Fore.BLACK + Back.CYAN + "Counts for Each Nationality:")
+print(Style.BRIGHT + Fore.RED + "Counts for Each Nationality:")
 for i in range(len(nationality_names)):
     print(Fore.BLACK + f"{nationality_names[i]}: " + Fore.BLUE + f"{nationality_counts[i]}")
 
@@ -295,10 +295,45 @@ for item in nationality_counts:
     total += item
 print(Fore.BLACK + "\nAccounted nationalities for " + Fore.BLUE + f"{total}" + Fore.BLACK + " astronauts.\n")
 
+government_count = 0
+private_count = 0
+
+row = 0
+
+while row < 814:
+    current_agency_type = df.loc[row, 'type_name']
+
+    if current_agency_type == "Government":
+        government_count += 1
+    if current_agency_type == "Private":
+        private_count +=1
+    
+    row += 1
+
+agency_types = ["Goverment",
+               "Private"]
+agency_types_counts = [government_count,
+               private_count]
+
+print(Style.BRIGHT + Fore.RED + "Agency Types and Counts Arrays:")
+print(Fore.BLACK + "Agency Types: " + Style.NORMAL + Fore.BLUE + f"{agency_types}\n")
+print(Fore.BLACK + "Agency Counts: " + Style.NORMAL + Fore.BLUE + f"{agency_types_counts}\n")
+
+print(Style.BRIGHT + Fore.RED + "Counts for Each Agency Type:")
+for i in range(len(agency_types)):
+    print(Fore.BLACK + f"{agency_types[i]}: " + Fore.BLUE + f"{agency_types_counts[i]}")
+
+total_agencies = 0
+for item in agency_types_counts:
+    total_agencies += item
+print(Fore.BLACK + "\nAccounted agency type for " + Fore.BLUE + f"{total}" + Fore.BLACK + " astronauts.\n")
+
+
+
 sorted_data = sorted(zip(nationality_counts, nationality_names))
 sorted_nationality_counts, sorted_nationality_names = zip(*sorted_data)
 
-with plt.style.context('seaborn-v0_8-dark'):
+with plt.style.context('seaborn-v0_8'):
     plt.bar(sorted_nationality_names, sorted_nationality_counts)
     plt.xlabel("Nationality", labelpad = 20, fontsize = 14)
     plt.xticks(rotation = 90, fontsize = 10)
@@ -310,8 +345,14 @@ with plt.style.context('seaborn-v0_8-dark'):
 
 age_counts = df['age'].value_counts()
 
-with plt.style.context('seaborn-v0_8-dark'):
+with plt.style.context('seaborn-v0_8'):
     plt.pie(age_counts.values, labels = age_counts.index, labeldistance = 1.05, rotatelabels = True)
     plt.title("Ages of Astronauts", pad = 25)
+    plt.axis("equal")
+    plt.show()
+
+with plt.style.context('seaborn-v0_8'):
+    plt.pie(agency_types_counts, labels = agency_types)
+    plt.title("Agency Types")
     plt.axis("equal")
     plt.show()
