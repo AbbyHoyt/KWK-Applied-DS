@@ -176,7 +176,7 @@ while row < 814:
     if "Norway" in current_nationality_array:
         norway_count += 1
 
-    row = row + 1
+    row += 1
 
 nationality_counts = [united_states_of_america_count, 
                       russia_count, 
