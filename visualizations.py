@@ -4,10 +4,13 @@ import numpy as np
 import colorama 
 from colorama import Fore, Style
 
+# Reset Colorama styling after each print statement.
 colorama.init(autoreset = True)
 
+# Convert CSV to a pandas DataFrame.
 df = pd.read_csv("astronaut_data_cleaned_v2.csv")
 
+# Collect nationality data for all astronauts.
 united_states_of_america_count = 0
 russia_count = 0
 china_count = 0
@@ -283,6 +286,7 @@ nationality_names = ["United States of America",
                      "Syria",
                      "Norway"]
 
+# Display nationality data.
 print(Style.BRIGHT + Fore.RED + "Nationality Names and Counts Arrays:")
 print(Fore.BLACK + "Nationality Names: " + Style.NORMAL + Fore.BLUE + f"{nationality_names}\n")
 print(Fore.BLACK + "Nationality Counts: " + Style.NORMAL + Fore.BLUE + f"{nationality_counts}\n")
@@ -291,11 +295,13 @@ print(Style.BRIGHT + Fore.RED + "Counts for Each Nationality:")
 for i in range(len(nationality_names)):
     print(Fore.BLACK + f"{nationality_names[i]}: " + Fore.BLUE + f"{nationality_counts[i]}")
 
+# Check there is nationality data for all astronauts.
 total = 0
 for item in nationality_counts:
     total += item
 print(Fore.BLACK + "\nAccounted nationalities for " + Fore.BLUE + f"{total}" + Fore.BLACK + " astronauts.\n")
 
+# Collect agency data for all astronauts.
 government_count = 0
 private_count = 0
 
@@ -307,7 +313,7 @@ while row < 814:
     if current_agency_type == "Government":
         government_count += 1
     if current_agency_type == "Private":
-        private_count +=1
+        private_count += 1
     
     row += 1
 
@@ -316,6 +322,7 @@ agency_types = ["Goverment",
 agency_types_counts = [government_count,
                private_count]
 
+# Display agency data.
 print(Style.BRIGHT + Fore.RED + "Agency Types and Counts Arrays:")
 print(Fore.BLACK + "Agency Types: " + Style.NORMAL + Fore.BLUE + f"{agency_types}\n")
 print(Fore.BLACK + "Agency Counts: " + Style.NORMAL + Fore.BLUE + f"{agency_types_counts}\n")
@@ -324,14 +331,17 @@ print(Style.BRIGHT + Fore.RED + "Counts for Each Agency Type:")
 for i in range(len(agency_types)):
     print(Fore.BLACK + f"{agency_types[i]}: " + Fore.BLUE + f"{agency_types_counts[i]}")
 
+# Check there is agency data for all astronauts.
 total_agencies = 0
 for item in agency_types_counts:
     total_agencies += item
 print(Fore.BLACK + "\nAccounted agency type for " + Fore.BLUE + f"{total}" + Fore.BLACK + " astronauts.\n")
 
+# Sort nationality data by count.
 sorted_data = sorted(zip(nationality_counts, nationality_names))
 sorted_nationality_counts, sorted_nationality_names = zip(*sorted_data)
 
+# Create nationality bar chart.
 with plt.style.context('seaborn-v0_8'):
     plt.bar(sorted_nationality_names, sorted_nationality_counts)
     plt.xlabel("Nationality", labelpad = 20, fontsize = 14)
@@ -342,17 +352,20 @@ with plt.style.context('seaborn-v0_8'):
     plt.tight_layout()
     plt.show()
 
+# Create agency type pie chart.
 with plt.style.context('seaborn-v0_8'):
     plt.pie(agency_types_counts, labels = agency_types)
     plt.title("Agency Types")
     plt.axis("equal")
     plt.show()
 
+# Create age data with bins.
 age_data = df['age'].to_numpy()
 age_bins = [0, 30, 50, 70, 100]
 age_bins_labels = ["Under 30", "30-50", "50-70", "Over 70"]
 age_counts, _ = np.histogram(age_data, bins = age_bins)
 
+# Create age pie chart.
 with plt.style.context('seaborn-v0_8'):
     plt.pie(age_counts, labels = age_bins_labels)
     plt.title("Ages of Astronauts")
