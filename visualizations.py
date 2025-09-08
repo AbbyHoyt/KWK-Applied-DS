@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 import colorama 
 from colorama import Fore, Style
 
@@ -328,8 +329,6 @@ for item in agency_types_counts:
     total_agencies += item
 print(Fore.BLACK + "\nAccounted agency type for " + Fore.BLUE + f"{total}" + Fore.BLACK + " astronauts.\n")
 
-
-
 sorted_data = sorted(zip(nationality_counts, nationality_names))
 sorted_nationality_counts, sorted_nationality_names = zip(*sorted_data)
 
@@ -343,16 +342,19 @@ with plt.style.context('seaborn-v0_8'):
     plt.tight_layout()
     plt.show()
 
-age_counts = df['age'].value_counts()
-
-with plt.style.context('seaborn-v0_8'):
-    plt.pie(age_counts.values, labels = age_counts.index, labeldistance = 1.05, rotatelabels = True)
-    plt.title("Ages of Astronauts", pad = 25)
-    plt.axis("equal")
-    plt.show()
-
 with plt.style.context('seaborn-v0_8'):
     plt.pie(agency_types_counts, labels = agency_types)
     plt.title("Agency Types")
+    plt.axis("equal")
+    plt.show()
+
+age_data = df['age'].to_numpy()
+age_bins = [0, 30, 50, 70, 100]
+age_bins_labels = ["Under 30", "30-50", "50-70", "Over 70"]
+age_counts, _ = np.histogram(age_data, bins = age_bins)
+
+with plt.style.context('seaborn-v0_8'):
+    plt.pie(age_counts, labels = age_bins_labels)
+    plt.title("Ages of Astronauts")
     plt.axis("equal")
     plt.show()
