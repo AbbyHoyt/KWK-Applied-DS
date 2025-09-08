@@ -1,5 +1,9 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import colorama 
+from colorama import Fore, Back, Style
+
+colorama.init(autoreset = True)
 
 df = pd.read_csv("astronaut_data_cleaned_v2.csv")
 
@@ -278,16 +282,18 @@ nationality_names = ["United States of America",
                      "Syria",
                      "Norway"]
 
-print(f"Nationality Names: {nationality_names}")
-print(f"Nationality Counts: {nationality_counts}")
+print(Style.BRIGHT + Fore.WHITE + Back.GREEN + "Nationality Names and Counts Arrays:")
+print(Fore.BLACK + "Nationality Names: " + Style.NORMAL + Fore.GREEN + f"{nationality_names}\n")
+print(Fore.BLACK + "Nationality Counts: " + Style.NORMAL + Fore.GREEN + f"{nationality_counts}\n")
 
+print(Style.BRIGHT + Fore.WHITE + Back.GREEN + "Counts for Each Nationality:")
 for i in range(len(nationality_names)):
-    print(f"{nationality_names[i]}: {nationality_counts[i]}")
+    print(Fore.BLACK + f"{nationality_names[i]}: " + Fore.GREEN + f"{nationality_counts[i]}")
 
 total = 0
 for item in nationality_counts:
     total += item
-print(f"Accounted nationalities for {total} astronauts.")
+print(Fore.BLACK + "\nAccounted nationalities for " + Fore.GREEN + f"{total}" + Fore.BLACK + " astronauts.\n")
 
 sorted_data = sorted(zip(nationality_counts, nationality_names))
 sorted_nationality_counts, sorted_nationality_names = zip(*sorted_data)
