@@ -301,3 +301,11 @@ with plt.style.context('seaborn-v0_8-dark'):
     plt.title("Nationality vs. Number of of Astronauts", fontsize = 14)
     plt.tight_layout()
     plt.show()
+
+age_counts = df['age'].value_counts()
+
+with plt.style.context('seaborn-v0_8-dark'):
+    plt.pie(age_counts.values, labels = age_counts.index, labeldistance = 1.05, rotatelabels = True)
+    plt.title("Ages of Astronauts", pad = 25)
+    plt.axis("equal")
+    plt.show()
