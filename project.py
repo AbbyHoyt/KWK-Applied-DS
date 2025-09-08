@@ -16,8 +16,8 @@ while api_url:
         response = requests.get(api_url)
         response.raise_for_status() 
         data = response.json()
-        astronaut_data.extend(data['results'])
-        api_url = data.get('next')
+        astronaut_data.extend(data["results"])
+        api_url = data.get("next")
     # If request was unsuccessful, display error message.
     except requests.exceptions.RequestException as e:
         print(f"Error fetching data: {e}")
@@ -25,11 +25,11 @@ while api_url:
 
 # Convert astronaut_data array into a pandas DataFrame.
 # Use json_normalize to deal with the dictionaries in the dataset.
-df = pd.json_normalize(astronaut_data, sep = '_')
+df = pd.json_normalize(astronaut_data, sep = "_")
 
 # Clean and filter API data, keeping only some columns.
-data_to_keep = ['id', 'name', 'status_name', 'type_name', 'agency_name', 'age', 'date_of_birth', 'date_of_death', 'nationality']
+data_to_keep = ["id", "name", "status_name", "type_name", "agency_name", "age", "date_of_birth", "date_of_death", "nationality"]
 df_final = df.reindex(columns = data_to_keep)
 
 # Turn final, filtered DataFrame into a CSV file.
-df_final.to_csv('astronaut_data_cleaned_v2.csv', index = False, encoding = 'utf-8')
+df_final.to_csv("astronaut_data_cleaned_v2.csv", index = False, encoding = "utf-8")

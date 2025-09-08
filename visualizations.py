@@ -67,7 +67,7 @@ norway_count = 0
 
 row = 0
 while row < 814:
-    current_nationality_array = df.loc[row, 'nationality']
+    current_nationality_array = df.loc[row, "nationality"]
 
     if "United States of America" in current_nationality_array:
         united_states_of_america_count += 1
@@ -308,7 +308,7 @@ private_count = 0
 row = 0
 
 while row < 814:
-    current_agency_type = df.loc[row, 'type_name']
+    current_agency_type = df.loc[row, "type_name"]
 
     if current_agency_type == "Government":
         government_count += 1
@@ -342,32 +342,32 @@ sorted_data = sorted(zip(nationality_counts, nationality_names))
 sorted_nationality_counts, sorted_nationality_names = zip(*sorted_data)
 
 # Create nationality bar chart.
-with plt.style.context('seaborn-v0_8'):
+with plt.style.context("seaborn-v0_8"):
     plt.bar(sorted_nationality_names, sorted_nationality_counts)
     plt.xlabel("Nationality", labelpad = 20, fontsize = 14)
     plt.xticks(rotation = 90, fontsize = 10)
     plt.ylabel("Number of Astronauts", labelpad = 20, fontsize = 14)
     plt.yticks(fontsize = 10)
-    plt.title("Nationality vs. Number of of Astronauts", fontsize = 14)
+    plt.title("Nationality vs. Number of of Astronauts", pad = 20, fontsize = 14)
     plt.tight_layout()
     plt.show()
 
 # Create agency type pie chart.
-with plt.style.context('seaborn-v0_8'):
-    plt.pie(agency_types_counts, labels = agency_types)
+with plt.style.context("seaborn-v0_8"):
+    plt.pie(agency_types_counts, labels = agency_types, autopct = "%1.1f%%")
     plt.title("Agency Types")
     plt.axis("equal")
     plt.show()
 
 # Create age data with bins.
-age_data = df['age'].to_numpy()
+age_data = df["age"].to_numpy()
 age_bins = [0, 30, 50, 70, 100]
 age_bins_labels = ["Under 30", "30-50", "50-70", "Over 70"]
 age_counts, _ = np.histogram(age_data, bins = age_bins)
 
 # Create age pie chart.
-with plt.style.context('seaborn-v0_8'):
-    plt.pie(age_counts, labels = age_bins_labels)
+with plt.style.context("seaborn-v0_8"):
+    plt.pie(age_counts, labels = age_bins_labels, autopct = "%1.1f%%")
     plt.title("Ages of Astronauts")
     plt.axis("equal")
     plt.show()
