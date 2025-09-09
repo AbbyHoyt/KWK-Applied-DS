@@ -317,10 +317,11 @@ while row < 814:
     
     row += 1
 
-agency_types = ["Goverment",
-               "Private"]
+agency_types = ["Goverment", 
+                "Private"]
+
 agency_types_counts = [government_count,
-               private_count]
+                       private_count]
 
 # Display agency data.
 print(Style.BRIGHT + Fore.RED + "Agency Types and Counts Arrays:")
@@ -341,9 +342,15 @@ print(Fore.BLACK + "\nAccounted agency type for " + Fore.BLUE + f"{total}" + For
 sorted_data = sorted(zip(nationality_counts, nationality_names))
 sorted_nationality_counts, sorted_nationality_names = zip(*sorted_data)
 
+# Function to add labels to nationality bar chart.
+def add_bar_chart_labels(sorted_nationality_names, sorted_nationality_counts):
+    for i in range(len(sorted_nationality_names)):
+        plt.text(i, sorted_nationality_counts[i] + 5, sorted_nationality_counts[i], ha = "center")
+
 # Create nationality bar chart.
 with plt.style.context("seaborn-v0_8"):
-    plt.bar(sorted_nationality_names, sorted_nationality_counts)
+    plt.bar(sorted_nationality_names, sorted_nationality_counts, width = 0.75)
+    add_bar_chart_labels(sorted_nationality_names, sorted_nationality_counts)
     plt.xlabel("Nationality", labelpad = 20, fontsize = 14)
     plt.xticks(rotation = 90, fontsize = 10)
     plt.ylabel("Number of Astronauts", labelpad = 20, fontsize = 14)
