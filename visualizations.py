@@ -354,20 +354,22 @@ with plt.style.context("seaborn-v0_8"):
 
 # Create agency type pie chart.
 with plt.style.context("seaborn-v0_8"):
-    plt.pie(agency_types_counts, labels = agency_types, autopct = "%1.1f%%")
-    plt.title("Agency Types")
+    plt.pie(agency_types_counts, labels = agency_types, autopct = "%1.1f%%", wedgeprops = {'linewidth': 1, 'edgecolor': "white"})
+    plt.title("Agency Types of Astronauts")
+    plt.legend(title = "Agency Type", loc = "upper right")
     plt.axis("equal")
     plt.show()
 
 # Create age data with bins.
 age_data = df["age"].to_numpy()
 age_bins = [0, 30, 50, 70, 100]
-age_bins_labels = ["Under 30", "30-50", "50-70", "Over 70"]
+age_bins_labels = ["Under 30 Years", "30-50 Years", "50-70 Years", "Over 70 Years"]
 age_counts, _ = np.histogram(age_data, bins = age_bins)
 
 # Create age pie chart.
 with plt.style.context("seaborn-v0_8"):
-    plt.pie(age_counts, labels = age_bins_labels, autopct = "%1.1f%%")
+    plt.pie(age_counts, labels = age_bins_labels, autopct = "%1.1f%%", wedgeprops = {'linewidth': 1, 'edgecolor': "white"})
     plt.title("Ages of Astronauts")
+    plt.legend(title = "Age Range", loc = "lower left")
     plt.axis("equal")
     plt.show()
