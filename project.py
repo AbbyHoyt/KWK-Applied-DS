@@ -28,8 +28,10 @@ while api_url:
 df = pd.json_normalize(astronaut_data, sep = "_")
 
 # Clean and filter API data, keeping only some columns.
-data_to_keep = ["id", "name", "status_name", "type_name", "agency_name", "age", "date_of_birth", "date_of_death", "nationality"]
+# data_to_keep = ["id", "name", "status_name", "type_name", "agency_name", "age", "date_of_birth", "date_of_death", "nationality"]
+data_to_keep = ["id", "name", "type_name", "age", "date_of_birth", "first_flight", "nationality"]
 df_final = df.reindex(columns = data_to_keep)
 
 # Turn final, filtered DataFrame into a CSV file.
-df_final.to_csv("astronaut_data_cleaned_v2.csv", index = False, encoding = "utf-8")
+# df_final.to_csv("astronaut_data_cleaned_v2.csv", index = False, encoding = "utf-8")
+df_final.to_csv("astronaut_data_updated.csv", index = False, encoding = "utf-8")

@@ -8,7 +8,8 @@ from colorama import Fore, Style
 colorama.init(autoreset = True)
 
 # Convert CSV to a pandas DataFrame.
-df = pd.read_csv("astronaut_data_cleaned_v2.csv")
+# df = pd.read_csv("astronaut_data_cleaned_v2.csv")
+df = pd.read_csv("astronaut_data_updated.csv")
 
 # Collect nationality data for all astronauts.
 united_states_of_america_count = 0
@@ -338,6 +339,31 @@ for item in agency_types_counts:
     total_agencies += item
 print(Fore.BLACK + "\nAccounted agency type for " + Fore.BLUE + f"{total}" + Fore.BLACK + " astronauts.\n")
 
+# Collect first flight age data for all astronauts.
+first_flight_ages = []
+missing_value_count = 0
+
+row = 0
+while row < 814: 
+    first_flight = str(df.loc[row, "first_flight"])
+    date_of_birth = str(df.loc[row, "date_of_birth"])
+
+    first_flight_year = str(first_flight[:4])
+    date_of_birth_year = str(date_of_birth[:4])
+
+    if first_flight_year == "nan" or date_of_birth_year == "nan":
+        missing_value_count += 1
+        break
+    else:
+        first_flight_ages.append(int(first_flight_year) - int(date_of_birth_year))
+
+    row += 1
+
+# Display first flight age data.
+print(Style.BRIGHT + Fore.RED + "First Flight Age Information:")
+print(Fore.BLACK + "First Flight Ages: " + Fore.BLUE + f"{first_flight_ages}")
+print(Fore.BLACK + "\nThere was/were " + Fore.BLUE + f"{missing_value_count}" + Fore.BLACK + " astronaut(s) with missing birth date or first flight age data.")
+
 # Sort nationality data by count.
 sorted_data = sorted(zip(nationality_counts, nationality_names))
 sorted_nationality_counts, sorted_nationality_names = zip(*sorted_data)
@@ -361,7 +387,7 @@ with plt.style.context("seaborn-v0_8"):
 
 # Create agency type pie chart.
 with plt.style.context("seaborn-v0_8"):
-    plt.pie(agency_types_counts, labels = agency_types, autopct = "%1.1f%%", wedgeprops = {'linewidth': 1, 'edgecolor': "white"})
+    plt.pie(agency_types_counts, labels = agency_types, autopct = "%1.2f%%", wedgeprops = {'linewidth': 1, 'edgecolor': "white"})
     plt.title("Agency Types of Astronauts")
     plt.legend(title = "Agency Type", loc = "upper right")
     plt.axis("equal")
@@ -375,8 +401,22 @@ age_counts, _ = np.histogram(age_data, bins = age_bins)
 
 # Create age pie chart.
 with plt.style.context("seaborn-v0_8"):
-    plt.pie(age_counts, labels = age_bins_labels, autopct = "%1.1f%%", wedgeprops = {'linewidth': 1, 'edgecolor': "white"})
+    plt.pie(age_counts, labels = age_bins_labels, autopct = "%1.2f%%", wedgeprops = {'linewidth': 1, 'edgecolor': "white"})
     plt.title("Ages of Astronauts")
     plt.legend(title = "Age Range", loc = "lower left")
+    plt.axis("equal")
+    plt.show()
+
+# Create first flight age data with bins.
+first_flight_age_data = first_flight_ages
+first_flight_age_bins = [0, 30, 35, 40, 45, 50, 60]
+first_flight_age_bins_labels = ["Under 30 Years", "30-35 Years", "35-40 Years", "40-45 Years", "45-50 Years", "Over 50 Years"]
+first_flight_age_counts, _ = np.histogram(first_flight_age_data, bins = first_flight_age_bins)
+
+# Create first flight age pie chart.
+with plt.style.context("seaborn-v0_8"):
+    plt.pie(first_flight_age_counts, labels = first_flight_age_bins_labels, autopct = "%1.2f%%", wedgeprops = {'linewidth': 1, 'edgecolor': "white"})
+    plt.title("Ages of Astronauts at Time of First Flight", pad = 30)
+    plt.legend(title = "Age Range", loc = "upper left")
     plt.axis("equal")
     plt.show()
