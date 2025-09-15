@@ -1,13 +1,13 @@
 import requests
 import pandas as pd
 
-# API endpoint for LaunchLibrary API v2.3.0.
+# Filtered API endpoint for LaunchLibrary API v2.3.0.
 api_url = "https://ll.thespacedevs.com/2.3.0/astronauts/?ordering=-time_in_space&is_human=true&limit=100"
 
 # Use Requests library to send a GET request to the LaunchLibrary API.
 response = requests.get(api_url)
 
-# Array to hold all data acquired from the API.
+# Array to hold all data acquired from the API endpoint.
 astronaut_data = []
 
 while api_url:
@@ -27,11 +27,9 @@ while api_url:
 # Use json_normalize to deal with the dictionaries in the dataset.
 df = pd.json_normalize(astronaut_data, sep = "_")
 
-# Clean and filter API data, keeping only some columns.
-# data_to_keep = ["id", "name", "status_name", "type_name", "agency_name", "age", "date_of_birth", "date_of_death", "nationality"]
+# Clean and filter API data, keeping only relevant columns.
 data_to_keep = ["id", "name", "type_name", "age", "date_of_birth", "first_flight", "nationality"]
 df_final = df.reindex(columns = data_to_keep)
 
 # Turn final, filtered DataFrame into a CSV file.
-# df_final.to_csv("astronaut_data_cleaned_v2.csv", index = False, encoding = "utf-8")
 df_final.to_csv("astronaut_data_updated.csv", index = False, encoding = "utf-8")

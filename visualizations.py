@@ -8,7 +8,6 @@ from colorama import Fore, Style
 colorama.init(autoreset = True)
 
 # Convert CSV to a pandas DataFrame.
-# df = pd.read_csv("astronaut_data_cleaned_v2.csv")
 df = pd.read_csv("astronaut_data_updated.csv")
 
 # Collect nationality data for all astronauts.
@@ -416,7 +415,7 @@ first_flight_age_counts, _ = np.histogram(first_flight_age_data, bins = first_fl
 # Create first flight age pie chart.
 with plt.style.context("seaborn-v0_8"):
     plt.pie(first_flight_age_counts, labels = first_flight_age_bins_labels, autopct = "%1.2f%%", wedgeprops = {'linewidth': 1, 'edgecolor': "white"})
-    plt.title("Ages of Astronauts at Time of First Flight", pad = 30)
+    plt.title("Age of Astronauts at Time of First Flight", pad = 30)
     plt.legend(title = "Age Range", loc = "upper left")
     plt.axis("equal")
     plt.show()
